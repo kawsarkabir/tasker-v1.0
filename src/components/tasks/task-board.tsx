@@ -5,12 +5,21 @@ import SearchTask from "./search-task";
 import TaskAction from "./task-action";
 import TaskList from "./task-list";
 
-export default function TaskBoard() {
-  const [tasks, setTasks] = useState(defaultTasks);
-  const [addShowModal, setAddShowModal] = useState(false);
-  const [taskEdit, setTaskEdit] = useState(null);
+type TTasks = {
+  id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  priority: string;
+  isFavorite: boolean;
+};
 
-  const handleAddTask = (newTask, isAddTask) => {
+export default function TaskBoard() {
+  const [tasks, setTasks] = useState<TTasks[]>(defaultTasks);
+  const [addShowModal, setAddShowModal] = useState<boolean>(false);
+  const [taskEdit, setTaskEdit] = useState<TTasks | null>(null);
+
+  const handleAddTask = (newTask: TTasks, isAddTask: boolean) => {
     if (isAddTask) {
       setTasks([...tasks, newTask]);
     } else {
@@ -22,30 +31,28 @@ export default function TaskBoard() {
     setAddShowModal(false);
   };
 
-  const handleEditTask = (task) => {
+  const handleEditTask = (task: TTasks) => {
     setTaskEdit(task);
     setAddShowModal(true);
   };
 
-  const handleDeleteTask = (id) => {
+  const handleDeleteTask = (id: string) => {
     const updatedTask = tasks.filter((task) => task.id !== id);
     setTasks(updatedTask);
   };
 
   const handleDeleteAllTask = () => {
-    tasks.length = 0;
-    setTasks([...tasks]);
+    setTasks([]);
   };
 
-  const handleFavariteTask = (id) => {
+  const handleFavariteTask = (id: string) => {
     const taskIndex = tasks.findIndex((task) => task.id === id);
     const updatedTasks = [...tasks];
     updatedTasks[taskIndex].isFavorite = !updatedTasks[taskIndex].isFavorite;
     setTasks(updatedTasks);
   };
 
-  const handleSearch = (search) => {
-    console.log(search);
+  const handleSearch = (search: string) => {
     const filteredTasks = tasks.filter((task) =>
       task.title.toLowerCase().includes(search.toLowerCase())
     );

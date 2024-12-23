@@ -1,4 +1,12 @@
-export default function TaskAction({ handleAddTask, handleDeleteAllTask }) {
+type TaskActionProps = {
+  handleAddTask: () => void;
+  handleDeleteAllTask: () => void;
+};
+
+export default function TaskAction({
+  handleAddTask,
+  handleDeleteAllTask,
+}: TaskActionProps) {
   return (
     <div className="mb-14 items-center justify-between sm:flex">
       <h2 className="text-2xl font-semibold max-sm:mb-4">Your Tasks</h2>

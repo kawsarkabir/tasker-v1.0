@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
-export default function SearchTask({ onSearch }) {
-  const [search, setSearch] = useState("");
-  const handleSearch = (e) => {
+type SearchTaskProps = {
+  onSearch: (query: string) => void;
+};
+
+export default function SearchTask({ onSearch }: SearchTaskProps) {
+  const [search, setSearch] = useState<string>("");
+
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSearch(search);
   };
+
   return (
-    <form>
+    <form onSubmit={handleSearch}>
       <div className="flex">
         <div className="relative overflow-hidden rounded-lg text-gray-50 md:min-w-[380px] lg:min-w-[440px]">
           <input
@@ -20,7 +26,6 @@ export default function SearchTask({ onSearch }) {
             required
           />
           <button
-            onClick={handleSearch}
             type="submit"
             className="absolute right-2 top-0 h-full rounded-e-lg text-white md:right-4"
           >
@@ -33,9 +38,9 @@ export default function SearchTask({ onSearch }) {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
               />
             </svg>

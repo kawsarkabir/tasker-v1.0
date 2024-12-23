@@ -1,17 +1,33 @@
 import { FaStar } from "react-icons/fa";
 
+type Task = {
+  id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  priority: string;
+  isFavorite: boolean;
+};
+
+type TaskListProps = {
+  tasks: Task[];
+  handleEditTask: (task: Task) => void;
+  handleDeleteTask: (id: string) => void;
+  handleFavariteTask: (id: string) => void;
+};
+
 export default function TaskList({
   tasks,
   handleEditTask,
   handleDeleteTask,
   handleFavariteTask,
-}) {
+}: TaskListProps) {
   return (
     <div className="overflow-auto">
       <table className="table-fixed overflow-auto xl:w-full">
         {tasks.length === 0 && (
           <tr>
-            <td colSpan="6" className="text-center">
+            <td colSpan={6} className="text-center">
               No Task Found
             </td>
           </tr>
