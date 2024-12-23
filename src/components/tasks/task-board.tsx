@@ -44,6 +44,14 @@ export default function TaskBoard() {
     setTasks([...tasks]);
   };
 
+  const handleFavariteTask = (id) => {
+    const taskIndex = tasks.findIndex((task) => task.id === id);
+    const updatedTasks = [...tasks];
+    updatedTasks[taskIndex].isFavorite = !updatedTasks[taskIndex].isFavorite;
+    setTasks(updatedTasks);
+    
+  };
+
   const closeModal = () => {
     setAddShowModal(false);
     setTaskEdit(null);
@@ -72,6 +80,7 @@ export default function TaskBoard() {
             tasks={tasks}
             handleEditTask={handleEditTask}
             handleDeleteTask={handleDeleteTask}
+            handleFavariteTask={handleFavariteTask}
           />
         </div>
       </div>

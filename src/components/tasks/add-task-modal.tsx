@@ -23,8 +23,11 @@ export default function AddTaskModal({ onSave, taskEdit, closeModal }) {
   };
   return (
     <>
-      <div className="bg-[#191D26] opacity-80  h-full w-full z-10 absolute top-0 left-0"></div>
-      <form class="mx-auto w-full max-w-[640px] rounded-xl border border-[#FEFBFB]/[36%] bg-[#191D26] p-8 max-md:px-4 z-10 absolute top-3/4 left-[28%]">
+      <div
+        onClick={closeModal}
+        class="fixed inset-0 bg-[#191D26] bg-opacity-80 z-10"
+      ></div>
+      <form class="mx-auto w-full max-w-[640px] rounded-xl border border-[#FEFBFB]/[36%] bg-[#191D26] p-8 max-md:px-4 z-10 absolute top-[78%] left-[28%]">
         <h2 class="mb-9 text-center text-2xl font-bold text-white lg:mb-11 lg:text-[28px]">
           {isAddTask ? "Add New Task" : "Edit Task"}
         </h2>
@@ -89,11 +92,11 @@ export default function AddTaskModal({ onSave, taskEdit, closeModal }) {
           </div>
         </div>
 
-        <div class="mt-16 flex justify-between">
+        <div class="mt-6 flex justify-between">
           <button
             onClick={closeModal}
             type="submit"
-            class="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
+            class="rounded bg-red-500 px-4 py-2 text-white transition-all hover:opacity-80"
           >
             Close
           </button>
