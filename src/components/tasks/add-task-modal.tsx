@@ -1,14 +1,17 @@
 import { useState } from "react";
 
-export default function AddTaskModal({ onSave }) {
-  const [task, setTask] = useState({
-    id: crypto.randomUUID(),
-    title: "",
-    description: "",
-    tags: [],
-    priority: "",
-    isFavorite: false,
-  });
+export default function AddTaskModal({ onSave, taskEdit, closeModal }) {
+  const [task, setTask] = useState(
+    taskEdit || {
+      id: crypto.randomUUID(),
+      title: "",
+      description: "",
+      tags: [],
+      priority: "",
+      isFavorite: false,
+    }
+  );
+  const [isAddTask, setIsAddTask] = useState(Object.is(taskEdit, null));
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -23,7 +26,7 @@ export default function AddTaskModal({ onSave }) {
       <div className="bg-[#191D26] opacity-80  h-full w-full z-10 absolute top-0 left-0"></div>
       <form class="mx-auto w-full max-w-[640px] rounded-xl border border-[#FEFBFB]/[36%] bg-[#191D26] p-8 max-md:px-4 z-10 absolute top-3/4 left-[28%]">
         <h2 class="mb-9 text-center text-2xl font-bold text-white lg:mb-11 lg:text-[28px]">
-          Add New Task
+          {isAddTask ? "Add New Task" : "Edit Task"}
         </h2>
 
         <div class="space-y-5 text-white">
@@ -86,16 +89,23 @@ export default function AddTaskModal({ onSave }) {
           </div>
         </div>
 
-        <div class="mt-16 flex justify-center">
+        <div class="mt-16 flex justify-between">
+          <button
+            onClick={closeModal}
+            type="submit"
+            class="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
+          >
+            Close
+          </button>
           <button
             onClick={(e) => {
               e.preventDefault();
-              onSave(task);
+              onSave(task, isAddTask);
             }}
             type="submit"
             class="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
           >
-            Create new Task
+            {isAddTask ? "Add Task" : "Update Task"}
           </button>
         </div>
       </form>
