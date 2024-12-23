@@ -12,7 +12,7 @@ export default function TaskBoard() {
     tags: ["lws", "react", "assignment"],
     priority: "high",
     isFavorite: false,
-  };e
+  };
   const [tasks, setTasks] = useState([defaultTask]);
   const [addShowModal, setAddShowModal] = useState(false);
 
