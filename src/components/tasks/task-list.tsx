@@ -9,6 +9,13 @@ export default function TaskList({
   return (
     <div className="overflow-auto">
       <table className="table-fixed overflow-auto xl:w-full">
+        {tasks.length === 0 && (
+          <tr>
+            <td colSpan="6" className="text-center">
+              No Task Found
+            </td>
+          </tr>
+        )}
         <thead>
           <tr>
             <th className="p-4 pb-8 text-sm font-semibold capitalize w-[48px]"></th>
