@@ -1,19 +1,12 @@
 import { useState } from "react";
+import { defaultTasks } from "../../utils/tasks";
 import AddTaskModal from "./add-task-modal";
 import SearchTask from "./search-task";
 import TaskAction from "./task-action";
 import TaskList from "./task-list";
 
 export default function TaskBoard() {
-  const defaultTask = {
-    id: crypto.randomUUID(),
-    title: "Complete Assingment 02",
-    description: "Complete the assignment 02 before the deadline",
-    tags: ["lws", "react", "assignment"],
-    priority: "high",
-    isFavorite: false,
-  };
-  const [tasks, setTasks] = useState([defaultTask]);
+  const [tasks, setTasks] = useState(defaultTasks);
   const [addShowModal, setAddShowModal] = useState(false);
   const [taskEdit, setTaskEdit] = useState(null);
 
